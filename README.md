@@ -4,7 +4,7 @@
 
 ## Getting Started
 
-Simply clone the repository, run `npm install`, and `node proxyfarm --in sources.txt --out proxies.txt`
+Simply clone the repository, run `npm install`, and `node --harmony proxyfarm --in sources.txt --out proxies.txt`
 
 NPM module coming soon!
 

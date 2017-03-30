@@ -2,9 +2,8 @@
   "name": "proxyfarm",
   "version": "0.0.1",
   "description": "Intelligently scrape proxies from arbitrary sources.",
-  "main": "index.js",
-  "scripts": {
-  },
+  "main": "proxyfarm.js",
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/clemmy/proxyfarm.git"
@@ -21,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/clemmy/proxyfarm/issues"
   },
-  "homepage": "https://github.com/clemmy/proxyfarm#readme"
+  "homepage": "https://github.com/clemmy/proxyfarm#readme",
+  "dependencies": {
+    "phantom": "^4.0.1"
+  }
 }
