@@ -1,0 +1,25 @@
+{
+  "name": "proxyfarm",
+  "version": "0.0.1",
+  "description": "Intelligently scrape proxies from arbitrary sources.",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/clemmy/proxyfarm.git"
+  },
+  "keywords": [
+    "proxyfarm",
+    "proxy",
+    "scrape",
+    "list",
+    "validate"
+  ],
+  "author": "Clement Hoang <clement.hoang24@gmail.com> (http://clementhoang.net)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/clemmy/proxyfarm/issues"
+  },
+  "homepage": "https://github.com/clemmy/proxyfarm#readme"
+}
