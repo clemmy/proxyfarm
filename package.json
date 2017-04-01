@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Intelligently scrape proxies from arbitrary sources.",
   "main": "proxyfarm.js",
+  "bin": {
+    "proxyfarm": "./proxyfarm.js"
+  },
   "scripts": {},
   "repository": {
     "type": "git",
@@ -22,6 +25,7 @@
   },
   "homepage": "https://github.com/clemmy/proxyfarm#readme",
   "dependencies": {
+    "commander": "^2.9.0",
     "phantom": "^4.0.1"
   }
 }
