@@ -15,6 +15,7 @@ const GET_NICE_TEXT_JS = `function() {
 }`;
 
 const DEFAULT_IN = path.resolve(__dirname, 'defaults/sources.txt');
+const DEFAULT_OUT = 'out.txt';
 
 var re = /([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3})(\s+|:)([0-9]{2,5})/g;
 
@@ -25,6 +26,11 @@ program
   .option('-i, --in <type>', 'filepath of proxy list sources')
   .option('-o, --out <type>', 'path to output proxy list')
   .parse(process.argv);
+
+let outputPath;
+if (program.out) {
+  outputPath = path.resolve(process.cwd(), program.out);
+}
 
 let proxyListSourcesRaw;
 try {
@@ -59,6 +65,9 @@ async function main() {
       console.log(`Proxies found on page: ${matches.length}`);
 
       const proxies = matches.map(s => s.replace(/\s+/, ':'));
+
+      fs.appendFileSync(outputPath || DEFAULT_OUT, proxies.join('\n') + '\n');
+      console.log('Proxies successfully written to: ' + (outputPath || DEFAULT_OUT));
     } catch(e) {
       console.error(`An error occurred while scraping ${source}. Skipping.`);
       continue;
