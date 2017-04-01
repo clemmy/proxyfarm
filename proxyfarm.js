@@ -17,7 +17,7 @@ const GET_NICE_TEXT_JS = `function() {
 const DEFAULT_IN = path.resolve(__dirname, 'defaults/sources.txt');
 const DEFAULT_OUT = 'out.txt';
 
-var re = /([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3})(\s+|:)([0-9]{2,5})/g;
+var re = /([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})(\s+|:)([0-9]{2,5})/g;
 
 // Get user arguments
 program
@@ -44,8 +44,10 @@ const proxyListSources = proxyListSourcesRaw.split(/\r?\n/).filter(line => !!lin
 console.log(`Scraping from ${proxyListSources.length} sources...`);
 
 async function main() {
-  const instance = await phantom.create();
+  const instance = await phantom.create(['--ignore-ssl-errors=yes']);
   const page = await instance.createPage();
+
+  await page.setting('userAgent', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36')
 
   for (const source of proxyListSources) {
     try {
@@ -64,7 +66,7 @@ async function main() {
       const matches = niceText.match(re) || [];
       console.log(`Proxies found on page: ${matches.length}`);
 
-      const proxies = matches.map(s => s.replace(/\s+/, ':'));
+      const proxies = matches.map(s => s.replace(/\s+/, ':')).filter(l => !!l.trim());
 
       fs.appendFileSync(outputPath || DEFAULT_OUT, proxies.join('\n') + '\n');
       console.log('Proxies successfully written to: ' + (outputPath || DEFAULT_OUT));
