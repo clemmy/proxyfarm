@@ -23,7 +23,14 @@ program
   .option('-o, --out <type>', 'path to output proxy list')
   .parse(process.argv);
 
-const proxyListSourcesRaw = fs.readFileSync(program.in || 'defaults/sources.txt', {encoding: 'utf8'});
+let proxyListSourcesRaw;
+try {
+  proxyListSourcesRaw = fs.readFileSync(program.in || 'defaults/sources.txt', {encoding: 'utf8'});
+} catch(err) {
+  console.error(`Error opening file: ${program.in || 'defaults/sources.txt'}`);
+  process.exit(1);
+}
+
 const proxyListSources = proxyListSourcesRaw.split(/\r?\n/).filter(line => !!line);
 console.log(`Scraping from ${proxyListSources.length} sources...`);
 
@@ -50,7 +57,7 @@ async function main() {
 
       const proxies = matches.map(s => s.replace(/\s+/, ':'));
     } catch(e) {
-      console.log(`An error occurred while scraping ${source}. Skipping.`);
+      console.error(`An error occurred while scraping ${source}. Skipping.`);
       continue;
     }
   }
