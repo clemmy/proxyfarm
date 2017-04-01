@@ -1,6 +1,7 @@
 #!/usr/bin/env node --harmony
 
 const fs = require('fs');
+const path = require('path');
 const phantom = require('phantom');
 const program = require('commander');
 
@@ -12,6 +13,8 @@ const GET_NICE_TEXT_JS = `function() {
   s.addRange(r);
   return s.toString();
 }`;
+
+const DEFAULT_IN = path.resolve(__dirname, 'defaults/sources.txt');
 
 var re = /([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3})(\s+|:)([0-9]{2,5})/g;
 
@@ -25,9 +28,9 @@ program
 
 let proxyListSourcesRaw;
 try {
-  proxyListSourcesRaw = fs.readFileSync(program.in || 'defaults/sources.txt', {encoding: 'utf8'});
+  proxyListSourcesRaw = fs.readFileSync(program.in || DEFAULT_IN, {encoding: 'utf8'});
 } catch(err) {
-  console.error(`Error opening file: ${program.in || 'defaults/sources.txt'}`);
+  console.error(`Error opening file: ${program.in || DEFAULT_IN}`);
   process.exit(1);
 }
 
