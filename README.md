@@ -18,7 +18,7 @@ NPM module coming soon!
 
 ### Prerequisites
 
-- Node.js 
+- Node.js v6.x and later
 
 ## Running the tests
 
